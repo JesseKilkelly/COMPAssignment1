@@ -11,9 +11,10 @@ public class Game {
     private QuestionBank hard;
     private QuestionBank finalQuestion;
     private LifeLine[] lifelines;
-    private SaveGame saveGame;
-    private LoadGame loadGame;
-    private CUI cui;
+    private final SaveGame saveGame;
+    private final LoadGame loadGame;
+    private final CUI cui;
+    private final int[] priseArray = {100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
     
     public Game(){
         this.cui = new CUI();
@@ -70,7 +71,8 @@ public class Game {
                     currentQuestions = finalQuestion;
                     continue;
                 }else{
-                    System.out.println("Congratulations! youre now a millionaire");
+                    System.out.println("Congratulations! youre now a Millionaire!");
+                    saveGame.save(player);
                     break;
                 }
             }
@@ -83,11 +85,17 @@ public class Game {
             if(q.IsCorrect(answer)){
                 cui.displayCorrect();
                 player.levelUp();
-                //sort out scores later
-                player.setScore(100);
+                //get score from array and set it
+                if (player.getLevel() <= priseArray.length){
+                    int prise = priseArray[player.getLevel()-1];
+                    player.setScore(prise);
+                }
+                System.out.println("Your current score is now: $" + player.getScore());
+                //make sure the data is up to date
+                saveGame.save(player);
             } else{
                 cui.displayIncorrect(q);
-                System.out.println("Game over. Your final score was: " + player.getScore());
+                System.out.println("Game over. Your final score was: $" + player.getScore());
                 break;
             }
             //If quits

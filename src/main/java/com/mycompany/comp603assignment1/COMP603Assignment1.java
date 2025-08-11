@@ -13,6 +13,7 @@ package com.mycompany.comp603assignment1;
  * Bonus:
  * more questions and randomize them
  * Do a 'Are you sure? is that your final answer?' check
+ * Add 'safety net' feature from the game
  * @author Jesse
  */
 public class COMP603Assignment1 {

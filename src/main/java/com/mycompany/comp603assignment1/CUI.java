@@ -27,15 +27,38 @@ public class CUI {
     public void displayQuestion(Question q) {
         System.out.println("\n" + q.getText());
         List<String> options = q.getOptions();
+        //replace %c with A, B , C and D
         for (int i = 0; i < options.size(); ++i) {
             System.out.printf("%c) %s\n", 'A' + i, options.get(i));
         }
     }
     
     public int getAnswer() {
-        System.out.println("Choose an option (A,B,C or D): ");
-        String input = scanner.nextLine().trim().toUpperCase();
-        return input.charAt(0) - 'A';
+        while(true){
+            System.out.println("Choose an option (A, B, C or D): ");
+            String input = scanner.nextLine().trim().toUpperCase();
+        
+            //add lifeline checks here
+            switch(input){
+                case "A": 
+                    return 0;        
+                case "B": 
+                    return 1;        
+                case "C": 
+                    return 2;        
+                case "D": 
+                    return 3;
+                //lifelines?    
+                case "1":
+                    return 4;
+                case "2":
+                    return 5;
+                case "3":
+                    return 6;
+                default:
+                    System.out.println("Invalid choice. Please enter (A, B, C or D) or lifelines (1, 2, or 3)");
+            }
+        }
     }
             
     public void displayCorrect(){
@@ -44,10 +67,18 @@ public class CUI {
     public void displayIncorrect(Question q){
         System.out.println("Sorry incorrect. The correct answer was: " + q.getOptions().get(q.getCorrectIndex()) + "\n");
     }
-    
     public boolean promptContinue(){
         System.out.println("Press 'y' if you want to continue to the next question? or 'n' leave with what you have?: ");
         return scanner.nextLine().trim().equalsIgnoreCase("y");
     }
-    
+    public void congrats(){
+        System.out.println("Congratulations! youre now a millionaire");
+    }
+    public void displayScore(int score){
+        System.out.println("Your current score is now: $" + score);
+    }    
+    public void displayFinalScore(int score){
+        System.out.println("Game over. Your final score was: $" + score);
+    }
 }
+

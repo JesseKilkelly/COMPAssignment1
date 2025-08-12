@@ -3,11 +3,18 @@ package com.mycompany.comp603assignment1;
 import java.util.*;
 /**
  * This class Loads the questions from the different difficulty files
- * and passes them through one by one
+ * Using load all questions put all the questions into one list
  * @author Jesse
  */
 public class QuestionBank {
-    private List<Question> questions = new ArrayList<>();
+    private final List<Question> questions = new ArrayList<>();
+    
+    //hope this still counts as 3 loads? - This was the easiest way i could think of for loading where left off
+    public void loadAllQuestions(String easyFile, String hardFile, String finalFile){
+        loadFile(easyFile);
+        loadFile(hardFile);
+        loadFile(finalFile);
+    }
     
     public void loadFile(String filename){
         FileManager fileManager = new FileManager();
@@ -25,8 +32,15 @@ public class QuestionBank {
             }
         }catch(Exception ex){
             System.out.println("Error loading questions: " +ex.getMessage());
+        }  
+    }
+    
+    public Question getQuestionByLevel(int level){
+        int index = level;
+        if (index >=0 && index < questions.size()){
+            return questions.get(index);
         }
-            
+        return null;
     }
     
     public Question getNextQuestion(){

@@ -12,7 +12,18 @@ public class PhoneAFriend extends LifeLine{
     
     public void use(Question q){
         //give a 50:50 hint 
+        int random = new Random().nextInt(4);
+            if(random <= 2)
+            {
+                //get wrong options
+                System.out.println("I think its either " + q.getCorrectIndex() + "or " +q.getIncorrect(1));
+                System.out.println("random: " + random);
+            }
+            else
+            {
+                //replace this and that with incorrect answers
+                System.out.println("Thats a tricky one. It could be " + q.getIncorrect(1) + "or " + q.getIncorrect(2));   
+            }
         //same as audience poll but less correct
-        //System.out.println("I think it could be " + answer1 + " or " +answer2);
     }
 }

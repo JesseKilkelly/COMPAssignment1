@@ -27,15 +27,18 @@ public class CUI {
     public void displayQuestion(Question q) {
         System.out.println("\n" + q.getText());
         List<String> options = q.getOptions();
-        //replace %c with A, B , C and D
+        //%c a char format specifier that is replaced with A, B , C and D
+        //since using ASCII values (A+0=A, A+1=B, A+2=C,...)
+        //%s then puts the string of text in(the question options)
         for (int i = 0; i < options.size(); ++i) {
             System.out.printf("%c) %s\n", 'A' + i, options.get(i));
         }
     }
     
+    //pass in lifelines and print their names here---
     public int getAnswer() {
         while(true){
-            System.out.println("Choose an option (A, B, C or D): ");
+            System.out.println("Choose an option (A, B, C or D) or use a lifeline (1, 2, or 3): ");
             String input = scanner.nextLine().trim().toUpperCase();
         
             //add lifeline checks here
@@ -48,12 +51,12 @@ public class CUI {
                     return 2;        
                 case "D": 
                     return 3;
-                //lifelines?    
-                case "1":
+                //lifelines    
+                case "1": //50:50
                     return 4;
-                case "2":
+                case "2": //phone a friend
                     return 5;
-                case "3":
+                case "3": // audience poll
                     return 6;
                 default:
                     System.out.println("Invalid choice. Please enter (A, B, C or D) or lifelines (1, 2, or 3)");
@@ -67,6 +70,7 @@ public class CUI {
     public void displayIncorrect(Question q){
         System.out.println("Sorry incorrect. The correct answer was: " + q.getOptions().get(q.getCorrectIndex()) + "\n");
     }
+    
     public boolean promptContinue(){
         System.out.println("Press 'y' if you want to continue to the next question? or 'n' leave with what you have?: ");
         return scanner.nextLine().trim().equalsIgnoreCase("y");

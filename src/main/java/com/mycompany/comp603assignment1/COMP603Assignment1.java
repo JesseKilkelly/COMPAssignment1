@@ -2,18 +2,17 @@ package com.mycompany.comp603assignment1;
 
 /**
  * Todo:
- * Lifelines - implement - use Random().nextInt(x) to decide if correct or not
- * using a lifeline removes it from being used
- * --Correct the scoring-- done
- * --When loading player, make their currentLevel be the question they are up to-- done
- * reset the level after --losing-- or passing the million dollar question
- * --Check input for only A B C or D-- done but need lifeline checks
- * If the player has already beaten the game, check if they would like to play again (Overriding their current level or adding the score on top)
+ * -Lifelines-
+ * - 5050, display only the 5050 choice after used
+ * when a life line is removed, dont display they can use it --- pass in lifeline to CUI
+ * -player-
+ * Save multiple people to a file?
+ * add a lifeline used to the player and save that
  * 
  * Bonus:
  * more questions and randomize them
- * Do a 'Are you sure? is that your final answer?' check
- * Add 'safety net' feature from the game
+ * Do a 'Are you sure?' check
+ * Safety net
  * @author Jesse
  */
 public class COMP603Assignment1 {

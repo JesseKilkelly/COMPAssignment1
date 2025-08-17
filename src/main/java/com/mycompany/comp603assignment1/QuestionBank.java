@@ -29,6 +29,9 @@ public class QuestionBank {
                 Question q = new Question(questionText, options, correctIndex);
                 q.shuffleOptions();
                 questions.add(q);
+                
+                //If we load more than the needed questions
+                //we could shuffle questions then just keep the amount needed here
             }
         }catch(Exception ex){
             System.out.println("Error loading questions: " +ex.getMessage());

@@ -6,7 +6,6 @@ import java.util.List;
 /**
  * for the single question pulled from the bank
  * holds the question, 4 options and correct option
- * ---------------Was working on this to be able to search through incorrect options------------
  * @author Jesse
  */
 public class Question {
@@ -54,7 +53,7 @@ public class Question {
                 incorrect[i] = options.indexOf(i);
         }
     }
-    
+    //for lifelines
     public int getIncorrect(int index){
         return incorrect[index];
     }

@@ -7,10 +7,8 @@ package com.mycompany.comp603assignment1;
 public class Game {
     
     private Player player;
-    private QuestionBank easy;
-    private QuestionBank hard;
-    private QuestionBank finalQuestion;
-    private LifeLine[] lifelines;
+    private final QuestionBank qBank;
+    private final LifeLine[] lifelines;
     private final SaveGame saveGame;
     private final LoadGame loadGame;
     private final CUI cui;
@@ -20,11 +18,11 @@ public class Game {
         this.cui = new CUI();
         this.saveGame = new SaveGame();
         this.loadGame = new LoadGame();
-        
+
         //Load
-        qList = new QuestionBank();
-        qList.loadAllQuestions("./resources/easy.txt", "./resources/hard.txt", "./resources/final.txt");
-        
+        qBank = new QuestionBank();
+        qBank.loadAllQuestions("./resources/easy.txt", "./resources/hard.txt", "./resources/final.txt");
+ 
         //multi initialise - polymorphism
         this.lifelines = new LifeLine[]{new FiftyFifty(), new PhoneAFriend(), new AudiencePoll()};
     }
@@ -34,6 +32,7 @@ public class Game {
         //if player doesn't want to be a millionaire then quit
         if (!cui.promptIntro())
             System.exit(0);
+        
         //else we play
         //get player name
         String name = cui.promptName();
@@ -50,20 +49,35 @@ public class Game {
         
         //Game loop
         while(true) {
-            Question currentQuestion = qList.getQuestionByLevel(player.getLevel());
+            //Question q = currentQuestions.getNextQuestion();
+            Question currentQuestion = qBank.getQuestionByLevel(player.getLevel());
             
             //got beyond the question list
             if (currentQuestion == null){
                 cui.congrats();
+                player.setLevel(0);//reset level after winning
                 saveGame.save(player);
                 break;
             }
-
+            
             //display question
-            cui.displayQuestion(q);
+            cui.displayQuestion(currentQuestion);
             int answer = cui.getAnswer();
             
             //check answer
+            //lifeline has been selected
+            if(answer >= 4 && answer <= 6){
+                int lifelineIndex = answer -4; //to get 0,1,2
+                if(lifelines[lifelineIndex] != null){
+                    lifelines[lifelineIndex].use(currentQuestion);
+                    lifelines[lifelineIndex] = null; // remove after used
+                }
+                else{
+                    System.out.println("Already used that lifeline");
+                }
+                continue; //ask question again ---- makes 50:50 a bit screwy
+            }
+            
             //They got it right - level up give score.
             if(currentQuestion.IsCorrect(answer)){
                 cui.displayCorrect();
@@ -75,20 +89,17 @@ public class Game {
                     player.setScore(prise);
                 }
                 cui.displayScore(player.getScore());
+                
                 //make sure the data is up to date
                 saveGame.save(player);
             }
-            else if(cui.getAnswer() == 1)//&& phone a friend hasnt been used)
-            {
-                //phone a friend has been used
-            }
+
             //They got it wrong - reset player, kick them out
             else{
                 cui.displayIncorrect(currentQuestion);
                 cui.displayFinalScore(player.getScore());
                 player.setLevel(0);
                 //check if safety net here
-                player.setScore(0);
                 saveGame.save(player);
                 break;
             }
@@ -101,3 +112,4 @@ public class Game {
         }
     }
 }
+

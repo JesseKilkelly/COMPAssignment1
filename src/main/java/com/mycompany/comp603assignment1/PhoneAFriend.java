@@ -1,5 +1,6 @@
 package com.mycompany.comp603assignment1;
 
+
 import java.util.*;
 /**
  * This life line should be correct 50% of the time
@@ -16,6 +17,7 @@ public class PhoneAFriend extends LifeLine{
         //give a 50:50 hint 
         List<String> options = q.getOptions();
         int answerIndex = q.getCorrectIndex();
+        System.out.println("Phone a Friend used!");
         
         //get the wrong answers into a list
         List<Integer> wrong = new ArrayList<>();
@@ -46,3 +48,4 @@ public class PhoneAFriend extends LifeLine{
         System.out.println("Thats a tricky one. It could be " + firstLetter + " or " + secondLetter);   
     }
 }
+

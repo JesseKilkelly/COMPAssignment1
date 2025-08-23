@@ -1,51 +1,65 @@
 package com.mycompany.comp603assignment1;
 
-
-import java.util.*;
 /**
- * This life line should be correct 50% of the time
+ * Holds all player data
  * @author Jesse
  */
-public class PhoneAFriend extends LifeLine{
-    private final Random rand = new Random();
+public class Player {
+    private String name;
+    private int currentLevel;
+    private int score;
+    private boolean[] lifelineUsed;
     
-    public PhoneAFriend(){
-        super("Phone A Friend");
+    //new player constructor
+    public Player(String name){
+        this.name = name;
+        this.currentLevel = 0;
+        this.score = 0;
+        this.lifelineUsed = new boolean[]{false, false, false};
     }
+    //overload constructor - for loading
+    public Player(String name, int currentLevel, int score, boolean[] lifelines)
+    {
+        this.name = name;
+        this.currentLevel = currentLevel;
+        this.score = score;
+        this.lifelineUsed = lifelines;
+    }
+    //gets and sets
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getLevel() {
+        return currentLevel;
+    }
+    public void setLevel(int currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void levelUp()
+    {
+        this.currentLevel += 1;
+    }    
     
-    public void use(Question q){
-        //give a 50:50 hint 
-        List<String> options = q.getOptions();
-        int answerIndex = q.getCorrectIndex();
-        System.out.println("Phone a Friend used!");
-        
-        //get the wrong answers into a list
-        List<Integer> wrong = new ArrayList<>();
-        for (int i = 0; i < options.size(); ++i){
-            if(i != answerIndex)
-                wrong.add(i);
-        }
-        Collections.shuffle(wrong, rand);
-        
-        boolean coinFlip = new Random().nextBoolean();
-        
-        int firstFriendChoice, secondFriendChoice;
-        
-        if(coinFlip){//friend knows one of them
-            firstFriendChoice = answerIndex;
-            secondFriendChoice = wrong.get(0);
-            }
-        else {//friend not smart
-            firstFriendChoice = wrong.get(0);
-            secondFriendChoice = wrong.get(1);
-                //replace this and that with incorrect answers
-            }
-        
-        //convert index to option characters
-        char firstLetter = (char)('A' + firstFriendChoice);
-        char secondLetter = (char)('A' + secondFriendChoice);
-        
-        System.out.println("Thats a tricky one. It could be " + firstLetter + " or " + secondLetter);   
+    //life lines
+    public boolean hasLifeline(int index){
+        return lifelineUsed[index];
+    }
+    public void useLifeline(int index){
+        lifelineUsed[index] = true;
+    }
+    public boolean[] getLifeLines(){
+        return lifelineUsed;
     }
 }
-

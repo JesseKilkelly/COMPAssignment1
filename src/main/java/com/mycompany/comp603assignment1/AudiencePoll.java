@@ -24,7 +24,7 @@ public class AudiencePoll extends LifeLine{
         }
         Collections.shuffle(wrong, rand);
         
-        System.out.println("Audience Poll use!");
+        System.out.println("Audience Poll used!");
         int percentage = rand.nextInt(4);
         //75% chance of being right
         if(percentage < 3)

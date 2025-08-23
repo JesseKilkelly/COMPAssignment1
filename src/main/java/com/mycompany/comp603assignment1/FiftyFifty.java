@@ -1,5 +1,6 @@
 package com.mycompany.comp603assignment1;
 
+import java.util.*;
 /**
  * give a 50:50 hint 
  * @author Jesse
@@ -33,3 +34,4 @@ public class FiftyFifty extends LifeLine{
         System.out.println("(" +secondLetter+ ") " +options.get(wrongIndex));   
     }
 }
+

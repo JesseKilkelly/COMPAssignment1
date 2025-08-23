@@ -5,7 +5,7 @@ package com.mycompany.comp603assignment1;
  * @author Jesse
  */
 public abstract class LifeLine {
-    private String name;
+    private final String name;
     
     public LifeLine(String name){
         this.name = name;

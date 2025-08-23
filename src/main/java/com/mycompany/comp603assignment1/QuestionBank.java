@@ -9,7 +9,7 @@ import java.util.*;
 public class QuestionBank {
     private final List<Question> questions = new ArrayList<>();
     
-    //hope this still counts as 3 loads? - This was the easiest way i could think of for loading where left off
+    //The 3 read from files - This was the easiest way i could think of for loading where left off
     public void loadAllQuestions(String easyFile, String hardFile, String finalFile){
         loadFile(easyFile);
         loadFile(hardFile);
@@ -31,7 +31,7 @@ public class QuestionBank {
                 questions.add(q);
                 
                 //If we load more than the needed questions
-                //we could shuffle questions then just keep the amount needed here
+                //we could shuffle questions then just keep the amount needed here   
             }
         }catch(Exception ex){
             System.out.println("Error loading questions: " +ex.getMessage());
@@ -52,3 +52,4 @@ public class QuestionBank {
         return null;
     }
 }
+

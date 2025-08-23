@@ -15,6 +15,7 @@ public class FiftyFifty extends LifeLine{
     public void use(Question q){
         List<String> options = q.getOptions();
         int answerIndex = q.getCorrectIndex();
+        System.out.println("50:50 used!");
         
         //get the wrong answers into a list
         List<Integer> wrong = new ArrayList<>();

@@ -2,12 +2,9 @@ package com.mycompany.comp603assignment1;
 
 /**
  * Todo:
- * -Lifelines-
- * - 5050, display only the 5050 choice after used
- * when a life line is removed, dont display they can use it --- pass in lifeline to CUI
+ * - bug - 50:50, display 5050 but then shows all options
  * -player-
- * Save multiple people to a file?
- * add a lifeline used to the player and save that
+ * Save multiple people to a file
  * 
  * Bonus:
  * more questions and randomize them
@@ -17,7 +14,13 @@ package com.mycompany.comp603assignment1;
  */
 public class COMP603Assignment1 {
     public static void main(String[] args) {
-        Game game = new Game();
+        
+        CUI cui = new CUI();
+        SaveGame saveGame = new SaveGame();
+        LoadGame loadGame = new LoadGame();
+        QuestionBank questionBank = new QuestionBank();
+        
+        Game game = new Game(cui, saveGame, loadGame, questionBank);
         game.start();
     }
 }

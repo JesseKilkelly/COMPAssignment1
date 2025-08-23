@@ -1,4 +1,4 @@
-package assignment1;
+package com.mycompany.comp603assignment1;
 
 import java.util.*;
 /**

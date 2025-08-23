@@ -14,13 +14,13 @@ public class Game {
     private final CUI cui;
     private final int[] priseArray = {100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000};
     
-    public Game(){
-        this.cui = new CUI();
-        this.saveGame = new SaveGame();
-        this.loadGame = new LoadGame();
+    public Game(CUI cui, SaveGame saveGame, LoadGame loadGame, QuestionBank questionBank){
+        this.cui = cui;
+        this.saveGame = saveGame;
+        this.loadGame = loadGame;
 
         //Load
-        qBank = new QuestionBank();
+        this.qBank = questionBank;
         qBank.loadAllQuestions("./resources/easy.txt", "./resources/hard.txt", "./resources/final.txt");
  
         //multi initialise - polymorphism
@@ -62,15 +62,21 @@ public class Game {
             
             //display question
             cui.displayQuestion(currentQuestion);
-            int answer = cui.getAnswer();
+            
+            boolean isAnswered = false;
+            while(!isAnswered){
+                
+                isAnswered = true;
+            }
+            int answer = cui.getAnswer(player.getLifeLines());
             
             //check answer
             //lifeline has been selected
             if(answer >= 4 && answer <= 6){
                 int lifelineIndex = answer -4; //to get 0,1,2
-                if(lifelines[lifelineIndex] != null){
+                if(!player.hasLifeline(lifelineIndex)){
                     lifelines[lifelineIndex].use(currentQuestion);
-                    lifelines[lifelineIndex] = null; // remove after used
+                    player.useLifeline(lifelineIndex); // remove after used
                 }
                 else{
                     System.out.println("Already used that lifeline");
@@ -93,7 +99,6 @@ public class Game {
                 //make sure the data is up to date
                 saveGame.save(player);
             }
-
             //They got it wrong - reset player, kick them out
             else{
                 cui.displayIncorrect(currentQuestion);
@@ -112,4 +117,5 @@ public class Game {
         }
     }
 }
+
 

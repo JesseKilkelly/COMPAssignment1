@@ -8,21 +8,23 @@ public class Player {
     private String name;
     private int currentLevel;
     private int score;
+    private boolean[] lifelineUsed;
     
     //new player constructor
     public Player(String name){
         this.name = name;
         this.currentLevel = 0;
         this.score = 0;
+        this.lifelineUsed = new boolean[]{false, false, false};
     }
     //overload constructor - for loading
-    public Player(String name, int currentLevel, int score)
+    public Player(String name, int currentLevel, int score, boolean[] lifelines)
     {
         this.name = name;
         this.currentLevel = currentLevel;
         this.score = score;
+        this.lifelineUsed = lifelines;
     }
-
     //gets and sets
     public String getName() {
         return name;
@@ -50,4 +52,14 @@ public class Player {
         this.currentLevel += 1;
     }    
     
+    //life lines
+    public boolean hasLifeline(int index){
+        return lifelineUsed[index];
+    }
+    public void useLifeline(int index){
+        lifelineUsed[index] = true;
+    }
+    public boolean[] getLifeLines(){
+        return lifelineUsed;
+    }
 }

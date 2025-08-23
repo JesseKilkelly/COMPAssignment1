@@ -36,12 +36,20 @@ public class CUI {
     }
     
     //pass in lifelines and print their names here---
-    public int getAnswer() {
+    public int getAnswer(boolean[] lifelines) {
         while(true){
-            System.out.println("Choose an option (A, B, C or D) or use a lifeline (1, 2, or 3): ");
+            System.out.println("Choose an option (A, B, C or D)");
+            System.out.printf("or use a lifeline ( ");
+            for (int i = 0; i < lifelines.length; ++i){
+                if(!lifelines[i]){
+                    System.out.printf((i+1)+" ");
+                }
+            }
+            System.out.println(")");
+                
             String input = scanner.nextLine().trim().toUpperCase();
         
-            //add lifeline checks here
+            //hard coded switch as no new lifelines should be added
             switch(input){
                 case "A": 
                     return 0;        
@@ -59,7 +67,7 @@ public class CUI {
                 case "3": // audience poll
                     return 6;
                 default:
-                    System.out.println("Invalid choice. Please enter (A, B, C or D) or lifelines (1, 2, or 3)");
+                    System.out.println("Invalid choice.");
             }
         }
     }
@@ -85,4 +93,5 @@ public class CUI {
         System.out.println("Game over. Your final score was: $" + score);
     }
 }
+
 
